@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -3020,10 +3020,10 @@ TextureImporter:
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_19: -1785740016
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_129: -1327984901
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_18: -1822443944
-      CosmicLegacy_ColorEdit_PetricakeGamesPNG_92: -1929291931
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_97: 781306907
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_8: 1522141470
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_20: 901384987
+      CosmicLegacy_ColorEdit_PetricakeGamesPNG_92: -1929291931
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_122: -2092852281
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_33: -1624200920
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_127: -1906996065
@@ -3063,13 +3063,13 @@ TextureImporter:
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_55: -949076134
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_35: 1270388242
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_0: -934804603
-      CosmicLegacy_ColorEdit_PetricakeGamesPNG_25: 1904976027
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_28: 243510309
-      CosmicLegacy_ColorEdit_PetricakeGamesPNG_63: -626625632
-      CosmicLegacy_ColorEdit_PetricakeGamesPNG_69: -521954492
-      CosmicLegacy_ColorEdit_PetricakeGamesPNG_98: 249101319
-      CosmicLegacy_ColorEdit_PetricakeGamesPNG_96: 137685090
+      CosmicLegacy_ColorEdit_PetricakeGamesPNG_25: 1904976027
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_39: 20044429
+      CosmicLegacy_ColorEdit_PetricakeGamesPNG_63: -626625632
+      CosmicLegacy_ColorEdit_PetricakeGamesPNG_98: 249101319
+      CosmicLegacy_ColorEdit_PetricakeGamesPNG_69: -521954492
+      CosmicLegacy_ColorEdit_PetricakeGamesPNG_96: 137685090
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_42: -2007189416
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_70: -440536106
       CosmicLegacy_ColorEdit_PetricakeGamesPNG_133: 482778772
