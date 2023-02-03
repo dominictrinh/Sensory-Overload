@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
 
+    [SerializeField] Camera mainCamera;
+
     Vector2 movement;
 
     // Update is called once per frame
@@ -18,8 +20,13 @@ public class PlayerMovement : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", movement.x);
+        // animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        
+        Debug.Log(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0f;
+        animator.SetFloat("Horizontal", mouseWorldPosition.x);
     }
 
     void FixedUpdate() 
