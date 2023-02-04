@@ -8,25 +8,38 @@ using Object = System.Object;
 
 [RequireComponent(typeof(Transform))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class Particle : MonoBehaviour
+[RequireComponent(typeof(SpriteRenderer))]
+public class AudioParticle : MonoBehaviour
 {
-    [SerializeField] private Transform transform;
-    [SerializeField] private Vector2 initVelocity;
-    [SerializeField] private Rigidbody2D rb;
+    private Transform _transform;
+    private Rigidbody2D _rb;
+    private SpriteRenderer _sprite;
+    private float _alphaIncrement;
 
+    [Header("Particle Properties")]
     [SerializeField] private float lifetime;
-
     [SerializeField] private int bounceLimit;
+    // [SerializeField] private Vector2 initVelocity;
     private int _bounces;
 
     // Runs when project starts
     private void Start()
     {
-        transform = GetComponent<Transform>();
-        rb = GetComponent<Rigidbody2D>();
+        _transform = GetComponent<Transform>();
+        _rb = GetComponent<Rigidbody2D>();
+        _sprite = GetComponent<SpriteRenderer>();
+
+        _alphaIncrement = 1 / lifetime;
 
         // rb.velocity = initVelocity
-        // Destroy(gameObject, lifetime);
+        Destroy(gameObject, lifetime);
+    }
+
+    private void FixedUpdate()
+    {
+        Color spriteColor = _sprite.color;
+        spriteColor.a = spriteColor.a - (_alphaIncrement * Time.fixedDeltaTime);
+        _sprite.color = spriteColor;
     }
 
     private void OnCollisionEnter2D(Collision2D col)
@@ -46,12 +59,12 @@ public class Particle : MonoBehaviour
         contX /= numContacts;
         contY /= numContacts;
         
-        Vector2.Reflect(rb.velocity, new Vector2(contX, contY));
+        Vector2.Reflect(_rb.velocity, new Vector2(contX, contY));
         _bounces++;
         if (_bounces > bounceLimit)
         {
-            rb.velocity = Vector2.zero;
-            Destroy(gameObject, lifetime);
+            _rb.velocity = Vector2.zero;
+            // Destroy(gameObject, lifetime);
         }
     }
 }
