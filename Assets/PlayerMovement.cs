@@ -15,6 +15,11 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
 
     // Update is called once per frame
+    private void Start()
+    {
+        Debug.Log(mainCamera.ScreenToWorldPoint(Input.mousePosition));
+    }
+
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -22,9 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
         // animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Speed", movement.sqrMagnitude);
-        
-        Debug.Log(mainCamera.ScreenToWorldPoint(Input.mousePosition));
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         mouseWorldPosition.z = 0f;
         animator.SetFloat("Horizontal", mouseWorldPosition.x);
     }
