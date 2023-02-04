@@ -1,27 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
-public class Controller : MonoBehaviour
-{
-    public float moveSpeed = 6;
+public class Controller : MonoBehaviour {
 
-    Rigidbody rigidbody;
-    Camera viewCamera;
-    Vector3 velocity;
+	public float moveSpeed = 6;
 
-    void Start () {
-        rigidbody = GetComponent<Rigidbody> ();
-        viewCamera = Camera.main;
-    }
+	Rigidbody2D rigidbody;
+	Camera viewCamera;
+	Vector2 movement;
+	Vector2 mousePos;
 
-    void Update () {
-        Vector3 mousePos = viewCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, viewCamera.transform.position.y));
-        transform.LookAt (mousePos + Vector3.up * transform.position.y);
-        velocity = new Vector3 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"), 0).normalized * moveSpeed;
-    }
+	void Start () {
+		rigidbody = GetComponent<Rigidbody2D> ();
+		viewCamera = Camera.main;
+	}
 
-    void FixedUpdate() {
-        rigidbody.MovePosition (rigidbody.position + velocity * Time.fixedDeltaTime);
-    }
+	void Update () {
+		mousePos = viewCamera.ScreenToWorldPoint(Input.mousePosition);
+		movement.x = Input.GetAxisRaw("Horizontal");
+		movement.y = Input.GetAxisRaw("Vertical");
+	}
+
+	void FixedUpdate() {
+		rigidbody.MovePosition (rigidbody.position + movement * moveSpeed * Time.fixedDeltaTime);
+		Vector2 lookDir = mousePos - rigidbody.position;
+		float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
+		rigidbody.rotation = angle;
+	}
 }
