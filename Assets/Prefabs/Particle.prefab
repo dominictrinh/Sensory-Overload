@@ -136,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22de3f4a39f5fad47b9244bd80255cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifetime: 12
+  lifetime: 6
   bounceLimit: 1

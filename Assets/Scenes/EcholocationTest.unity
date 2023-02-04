@@ -289,10 +289,11 @@ MonoBehaviour:
   currentCamera: {fileID: 0}
   origParticle: {fileID: 2549203400016319346, guid: 9481007c66b152c45894d09327a4d1b2, type: 3}
   copies: 64
-  particleVel: 10
+  particleVel: 5
   degreeSpread: 90
-  cooldownStart: 5
-  cooldownRate: 1
+  cooldownStart: 8
+  particleLifetime: 6
+  particleBounceLimit: 1
   isPlayer: 0
   sourceAngle: 270
 --- !u!212 &502081107
@@ -360,7 +361,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -443,8 +444,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 2104795073}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327182766
 GameObject:
@@ -1380,9 +1381,10 @@ Transform:
   m_LocalPosition: {x: -8, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 519420032}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2104795075
 CircleCollider2D:
@@ -1420,7 +1422,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2104795077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1439,6 +1441,7 @@ MonoBehaviour:
   particleVel: 10
   degreeSpread: 120
   cooldownStart: 3
-  cooldownRate: 1
+  particleLifetime: 6
+  particleBounceLimit: 2
   isPlayer: 1
   sourceAngle: 0

@@ -21,7 +21,8 @@ public class EmitAudioParticle : MonoBehaviour
     [SerializeField] private float particleVel;
     [SerializeField] private float degreeSpread;
     [SerializeField] private float cooldownStart;
-    [SerializeField] private float cooldownRate;
+    [SerializeField] private float particleLifetime;
+    [SerializeField] private int particleBounceLimit;
     
     private float _centerAngleDeg;
     private float _particleOffset; // how much each particle should be separated by, ish
@@ -71,6 +72,10 @@ public class EmitAudioParticle : MonoBehaviour
             for (int i = 0; i < copies; i++)
             {
                 GameObject particle = Instantiate(origParticle, _parentTransform.position, Quaternion.identity);
+                AudioParticle particleScript = particle.GetComponent<AudioParticle>();
+                particleScript.SetLifetime(particleLifetime);
+                particleScript.SetBounceLimit(particleBounceLimit);
+                
                 Rigidbody2D particleRb = particle.GetComponent<Rigidbody2D>();
                 if (particleRb)
                 {
@@ -86,7 +91,7 @@ public class EmitAudioParticle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _cooldown -= cooldownRate * Time.fixedDeltaTime;
+        _cooldown -= Time.fixedDeltaTime;
         if (_cooldown < 0)
         {
             _cooldown = 0;
