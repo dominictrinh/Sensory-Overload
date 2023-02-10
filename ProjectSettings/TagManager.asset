@@ -14,8 +14,8 @@ TagManager:
   - Targets
   - Obstacles
   - 
-  - 
-  - 
+  - targetMask
+  - obstacleMask
   - 
   - 
   - 
