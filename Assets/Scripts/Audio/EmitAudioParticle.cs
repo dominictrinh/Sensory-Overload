@@ -11,8 +11,6 @@ using Random = UnityEngine.Random;
 
 public class EmitAudioParticle : MonoBehaviour
 {
-    [Header("Components")]
-    [SerializeField] private Camera currentCamera;
     private Transform _parentTransform;
     
     [Header("Particle Info")]
@@ -20,7 +18,7 @@ public class EmitAudioParticle : MonoBehaviour
     [SerializeField] private int copies;
     [SerializeField] private float particleVel;
     [SerializeField] private float degreeSpread;
-    [SerializeField] private float cooldownStart;
+    [FormerlySerializedAs("cooldownStart")] [SerializeField] private float cooldown;
     [SerializeField] private float particleLifetime;
     [SerializeField] private int particleBounceLimit;
     
@@ -30,6 +28,7 @@ public class EmitAudioParticle : MonoBehaviour
     [FormerlySerializedAs("isSource")]
     [Header("Audio Source")] 
     [SerializeField] private bool isPlayer;
+    [SerializeField] private Camera currentCamera;
     [SerializeField] private float sourceAngle;
     private float _cooldown;
     
@@ -39,7 +38,7 @@ public class EmitAudioParticle : MonoBehaviour
         _parentTransform = GetComponent<Transform>();
         _particleOffset = (degreeSpread / copies) * Mathf.PI / 180f;
         _cooldown = 0;
-
+    
         if (!isPlayer)
         {
             _centerAngleDeg = sourceAngle;
@@ -85,7 +84,7 @@ public class EmitAudioParticle : MonoBehaviour
                 }
             }
             
-            _cooldown = cooldownStart;
+            _cooldown = cooldown;
         }
     }
 

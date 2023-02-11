@@ -11,6 +11,7 @@ using Object = System.Object;
 [RequireComponent(typeof(SpriteRenderer))]
 public class AudioParticle : MonoBehaviour
 {
+    [SerializeField] private GameObject particle;
     private Rigidbody2D _rb;
     private SpriteRenderer _sprite;
     private float _alphaIncrement;
@@ -52,21 +53,9 @@ public class AudioParticle : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         List<ContactPoint2D> contacts = new List<ContactPoint2D>(col.contactCount);
-
-        int numContacts = col.GetContacts(contacts);
-
-        float contX = 0;
-        float contY = 0;
-        foreach (ContactPoint2D contact in contacts)
-        {
-            contX += contact.normal.x;
-            contY += contact.normal.y;
-        }
-
-        contX /= numContacts;
-        contY /= numContacts;
+        col.GetContacts(contacts);
         
-        Vector2.Reflect(_rb.velocity, new Vector2(contX, contY));
+        Vector2.Reflect(_rb.velocity, contacts[0].normal);
         _bounces++;
         if (_bounces > _bounceLimit)
         {
