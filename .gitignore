@@ -26,6 +26,15 @@
 # Visual Studio cache directory
 .vs/
 
+<<<<<<< Updated upstream
+=======
+# .idea
+.idea/
+
+# VSCode settings
+.vscode/
+
+>>>>>>> Stashed changes
 # Gradle cache directory
 .gradle/
 
