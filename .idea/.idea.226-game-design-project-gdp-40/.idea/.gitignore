@@ -2,9 +2,15 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
+<<<<<<< HEAD
 /projectSettingsUpdater.xml
 /contentModel.xml
 /modules.xml
+=======
+/modules.xml
+/projectSettingsUpdater.xml
+/contentModel.xml
+>>>>>>> master
 /.idea.226-game-design-project-gdp-40.iml
 # Editor-based HTTP Client requests
 /httpRequests/
