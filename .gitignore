@@ -26,12 +26,21 @@
 # Visual Studio cache directory
 .vs/
 
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+=======
+=======
+>>>>>>> master
 # .idea
 .idea/
 
 # VSCode settings
 .vscode/
 
+<<<<<<< HEAD
+>>>>>>> Stashed changes
+=======
+>>>>>>> master
 # Gradle cache directory
 .gradle/
 
