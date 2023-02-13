@@ -15,6 +15,7 @@ public class FieldOfView : MonoBehaviour {
     public List<Transform> visibleTargets = new List<Transform>();
 
     public float meshResolution;
+    public float maskCutawaydst = .1f;
     public int edgeResolveIterations;
     public float edgeDstThreshold;
     public MeshFilter viewMeshFilter;
@@ -27,6 +28,7 @@ public class FieldOfView : MonoBehaviour {
         viewMeshFilter.mesh = viewMesh;
         
         StartCoroutine ("FindTargetsWithDelay", .2f);
+        
     }
 
     void LateUpdate()
@@ -95,7 +97,7 @@ public class FieldOfView : MonoBehaviour {
         vertices[0] = Vector3.zero;
         for (int i = 0; i < vertexCount - 1; i++)
         {
-            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]);
+            vertices[i + 1] = transform.InverseTransformPoint(viewPoints[i]) + Vector3.right * maskCutawaydst;
 
             if (i < vertexCount - 2)
             {
