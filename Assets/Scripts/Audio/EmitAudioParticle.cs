@@ -16,6 +16,7 @@ public class EmitAudioParticle : MonoBehaviour
     [Header("Particle Info")]
     [SerializeField] private GameObject origParticle;
     [SerializeField] private int copies;
+    [SerializeField] private float scale;
     [SerializeField] private float particleVel;
     [SerializeField] private float degreeSpread;
     [FormerlySerializedAs("cooldownStart")] [SerializeField] private float cooldown;
@@ -71,6 +72,7 @@ public class EmitAudioParticle : MonoBehaviour
             for (int i = 0; i < copies; i++)
             {
                 GameObject particle = Instantiate(origParticle, _parentTransform.position, Quaternion.identity);
+                particle.transform.localScale = new Vector3(scale, scale, scale);
                 AudioParticle particleScript = particle.GetComponent<AudioParticle>();
                 particleScript.SetLifetime(particleLifetime);
                 particleScript.SetBounceLimit(particleBounceLimit);
