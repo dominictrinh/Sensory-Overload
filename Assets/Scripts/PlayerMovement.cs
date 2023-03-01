@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMovement : MonoBehaviour
 {
 
-    public float moveSpeed = 5f;
+    public float moveSpeed = 1f;
 
     public Rigidbody2D rb;
     public Animator animator;
+    [SerializeField] new Light2D light;
 
     [SerializeField] Camera mainCamera;
 
@@ -31,9 +33,15 @@ public class PlayerMovement : MonoBehaviour
         Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         mouseWorldPosition.z = 0f;
         animator.SetFloat("Horizontal", mouseWorldPosition.x);
+        
+        float angle = Mathf.Atan2(mouseWorldPosition.y, mouseWorldPosition.x) * Mathf.Rad2Deg - 90;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        light.transform.rotation = rotation;
+        
+        // light.transform.Rotate(0,0,rotation, );
     }
 
-    void FixedUpdate() 
+    void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
