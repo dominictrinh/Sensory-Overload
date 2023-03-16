@@ -5,7 +5,8 @@ using UnityEngine;
 public class DoorTriggerButton : MonoBehaviour
 {
     [SerializeField] private DoorAnimated door;
-    // Update is called once per frame
+    
+
     void Update()
     {
 
