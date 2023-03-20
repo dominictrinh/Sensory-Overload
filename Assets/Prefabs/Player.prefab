@@ -442,11 +442,11 @@ MonoBehaviour:
   hearingObjects:
   - {fileID: 2594247558650509127}
   smellObjects: []
-  vision: 0
+  vision: 1
   hearing: 0
   smell: 0
   mainCamera: {fileID: 0}
-  audioParticleLayer: 0
+  audioParticleLayer: 6
 --- !u!114 &5708310367709173979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,9 +463,9 @@ MonoBehaviour:
   invObjectPrefab: {fileID: 3427084431548129879, guid: 422bf1f4b2be0694f8e274c98e069e4f, type: 3}
   maxItems: 4
   inventoryList: []
-  pickupRadius: 1
+  pickupRadius: 0.16
   overlaps: []
-  overlapMax: 0
+  overlapMax: 64
 --- !u!1 &7168147425869290923
 GameObject:
   m_ObjectHideFlags: 0

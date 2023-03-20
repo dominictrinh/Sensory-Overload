@@ -17,16 +17,20 @@ public class InventoryController : MonoBehaviour
 
     [Header("Other")] 
     [SerializeField] private float pickupRadius;
-    [SerializeField] private Collider2D[] overlaps;
+    [SerializeField] private List<Collider2D> overlaps;
     [SerializeField] private int overlapMax;
 
     void Start()
     {
-        overlaps = new Collider2D[overlapMax];
+        overlaps = new List<Collider2D>(overlapMax);
     }
     
     private void UpdatePanel()
     {
+        foreach (Transform child in inventoryPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
         // TODO: update the panel w/ the items
         foreach (InventoryObject invObj in inventoryList)
         { 
@@ -47,10 +51,17 @@ public class InventoryController : MonoBehaviour
 
         if (!invFull)
         {
-            inventoryList.Add(invObj);
-            UpdatePanel();
+            if (!inventoryList.Contains(invObj))
+            {
+                inventoryList.Add(invObj);
+                UpdatePanel();
             
-            invObj.gameObject.SetActive(false);
+                invObj.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Trying to add something to inventory which is already inside!");
+            }
         }
         else
         {
@@ -76,11 +87,10 @@ public class InventoryController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetAxis("Interact") > 0)
+        if (Input.GetButton("Interact"))
         {
             ContactFilter2D noFilter = new ContactFilter2D();
             int overlapCount = Physics2D.OverlapCircle(gameObject.transform.position, pickupRadius, noFilter.NoFilter(), overlaps);
-            Debug.Log(overlaps);
             Debug.Log($"Number of objects in range: {overlapCount}");
             
             foreach (Collider2D overlap in overlaps)
