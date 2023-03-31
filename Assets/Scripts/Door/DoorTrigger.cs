@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
-    [SerializeField] private DoorAnimator door;
+    [SerializeField] private DoorAnimator door1;
     [SerializeField] private DoorToggle door2;
+    [SerializeField] private DoorToggle lvl2door1;
+    [SerializeField] private DoorToggle lvl2door2;
 
     private bool closed = true;
 
@@ -13,12 +15,12 @@ public class DoorTrigger : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            door.OpenDoor();
+            door1.OpenDoor();
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            StartCoroutine(door.CloseDoor());
+            StartCoroutine(door1.CloseDoor());
         }
 
         if (Input.GetKeyDown(KeyCode.F) & closed)

@@ -29,9 +29,10 @@ public class EmitAudioParticle : MonoBehaviour
     [FormerlySerializedAs("isSource")]
     [Header("Audio Source")] 
     [SerializeField] private bool isPlayer;
+    [SerializeField] private bool isEmitter;
     [SerializeField] private Camera currentCamera;
     [SerializeField] private float sourceAngle;
-    private float _cooldown;
+    public float _cooldown;
     
     // Start is called before the first frame update
     private void Start()
@@ -48,7 +49,7 @@ public class EmitAudioParticle : MonoBehaviour
 
     private void Update()
     {
-        if ((!isPlayer && _cooldown <= 0) || (isPlayer && Input.GetKeyDown("space") && _cooldown <= 0))
+        if (((!isPlayer || isEmitter) && _cooldown <= 0) || (isPlayer && Input.GetKeyDown("space") && _cooldown <= 0))
         {
             float offset = 0;
             if (isPlayer)
@@ -92,14 +93,17 @@ public class EmitAudioParticle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _cooldown -= Time.fixedDeltaTime;
+        if (!isEmitter)
+        {
+            _cooldown -= Time.fixedDeltaTime;
+        }
         if (_cooldown < 0)
         {
             _cooldown = 0;
         }
         else
         {
-            Debug.Log($"Cooldown: {_cooldown}");
+            // Debug.Log($"Cooldown: {_cooldown}");
         }
     }
 }
