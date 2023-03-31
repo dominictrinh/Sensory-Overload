@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EcholocationTest.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
+    path: Assets/Scenes/InventoryTest.unity
+    guid: a02a7bfd8e1e9d5438de97a7fd109407
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f2054de5ba035204ca52079a936c13f5
+  - enabled: 1
+    path: Assets/Scenes/VideoDemo.unity
+    guid: 004fb2e8fd3f4db4785ff5a196effe7f
   m_configObjects: {}

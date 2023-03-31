@@ -461,11 +461,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 2782812017393534679}
   invObjectPrefab: {fileID: 3427084431548129879, guid: 422bf1f4b2be0694f8e274c98e069e4f, type: 3}
+  pickupDialog: {fileID: 1200406999187353698}
   maxItems: 4
   inventoryList: []
-  pickupRadius: 0.16
+  currentItem: {fileID: 0}
+  mainCamera: {fileID: 0}
+  pickupRadius: 0.32
+  dropRadius: 0
+  dropImgAlpha: 0.5
   overlaps: []
   overlapMax: 64
+  dropState: 0
 --- !u!1 &7168147425869290923
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +590,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4468745153208220713}
     m_Modifications:
+    - target: {fileID: 6887512780442480675, guid: b0b33961469258f48b6456f4ca09d372, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7612041486567760717, guid: b0b33961469258f48b6456f4ca09d372, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -651,6 +661,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7612041486567760716, guid: b0b33961469258f48b6456f4ca09d372, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b0b33961469258f48b6456f4ca09d372, type: 3}
+--- !u!1 &1200406999187353698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6887512780442480675, guid: b0b33961469258f48b6456f4ca09d372, type: 3}
+  m_PrefabInstance: {fileID: 5709983440095985729}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2782812017393534679 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7612041485942703766, guid: b0b33961469258f48b6456f4ca09d372, type: 3}
