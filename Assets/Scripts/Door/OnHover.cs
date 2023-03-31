@@ -6,6 +6,7 @@ using UnityEngine;
 public class OnHover : MonoBehaviour
 {
     [SerializeField] private DoorAnimator door;
+    [SerializeField] private DoorToggle lvl2door;
     
     bool isHovering;
     public float timeToWait = 3f;
@@ -25,6 +26,7 @@ public class OnHover : MonoBehaviour
     {
         isHovering = false;
         timeLeft = timeToWait;
+        lvl2door.CloseDoor();
     }
      
     void Update()
@@ -36,6 +38,7 @@ public class OnHover : MonoBehaviour
         if (timeLeft < 0)
         {
             door.OpenDoor();
+            lvl2door.OpenDoor();
         }
     }
 }
