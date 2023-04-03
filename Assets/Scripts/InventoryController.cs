@@ -146,8 +146,11 @@ public class InventoryController : MonoBehaviour
                 // switching to drop state if not in drop state
                 if (Input.GetButtonDown("Drop"))
                 {
-                    Debug.Log("switching states!");
-                    dropState = !dropState;
+                    if (inventoryList.Count > 0)
+                    {
+                        Debug.Log("switching states!");
+                        dropState = !dropState;
+                    }
                 }
                 else
                 {
