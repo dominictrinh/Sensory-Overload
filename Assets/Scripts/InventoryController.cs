@@ -189,6 +189,15 @@ public class InventoryController : MonoBehaviour
                                     List<RaycastHit2D> results = new List<RaycastHit2D>();
                                     int pickupLinecastCount =
                                         Physics2D.Linecast(gameObject.transform.position, pickupObj.transform.position, noFilter, results);
+
+                                    foreach (RaycastHit2D hit in results)
+                                    {
+                                        if (hit.collider.isTrigger)
+                                        {
+                                            pickupLinecastCount--;
+                                        }
+                                    }
+                                    
                                     // if no objects in between
                                     if (pickupLinecastCount < 3)
                                     {
@@ -279,7 +288,16 @@ public class InventoryController : MonoBehaviour
                         // check for objects in between
                         ContactFilter2D noFilter = new ContactFilter2D();
                         int overlapCount = Physics2D.OverlapCircle(currentItemGO.transform.position, dropDetectionRadius, noFilter.NoFilter(), overlaps);
-                        if (overlapCount == 0)
+
+                        foreach (Collider2D overlap in overlaps)
+                        {
+                            if (overlap.isTrigger)
+                            {
+                                overlapCount--;
+                            }
+                        }
+                        
+                        if (overlapCount <= 0)
                         {
                             Debug.Log("No objects in desired position!");
                             // if no objects in between
