@@ -55,7 +55,7 @@ MonoBehaviour:
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
-  m_LightOrder: 0
+  m_LightOrder: 1
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 1
   m_NormalMapDistance: 3
@@ -423,8 +423,10 @@ MonoBehaviour:
   particleLifetime: 4
   particleBounceLimit: 2
   isPlayer: 1
+  isEmitter: 0
   currentCamera: {fileID: 0}
   sourceAngle: 0
+  _cooldown: 0
 --- !u!114 &2594247558650509126
 MonoBehaviour:
   m_ObjectHideFlags: 0
