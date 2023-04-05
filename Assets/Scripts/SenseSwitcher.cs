@@ -7,9 +7,12 @@ using UnityEngine.Serialization;
 public class SenseSwitcher : MonoBehaviour
 {
     [Header("Objects List")]
-    [SerializeField] private List<MonoBehaviour> visionObjects;
-    [SerializeField] private List<MonoBehaviour> hearingObjects;
-    [SerializeField] private List<MonoBehaviour> smellObjects;
+    [FormerlySerializedAs("visionObjects")] [SerializeField] private List<MonoBehaviour> visionScripts;
+    [FormerlySerializedAs("hearingObjects")] [SerializeField] private List<MonoBehaviour> hearingScripts;
+    [FormerlySerializedAs("smellObjects")] [SerializeField] private List<MonoBehaviour> smellScripts;
+    [SerializeField] private List<GameObject> visionObjs;
+    [SerializeField] private List<GameObject> hearingObjs;
+    [SerializeField] private List<GameObject> smellObjs;
 
     [Header("Current State")]
     [SerializeField] private bool vision;
@@ -23,51 +26,78 @@ public class SenseSwitcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxis("Vision") > 0)
+        bool changed = false;
+        
+        if (Input.GetButtonDown("Vision"))
         {
             vision = true;
             hearing = false;
             smell = false;
+
+            changed = true;
         }
 
-        if (Input.GetAxis("Hearing") > 0)
+        if (Input.GetButtonDown("Hearing"))
         {
             vision = false;
             hearing = true;
             smell = false;
+            
+            changed = true;
         }
 
-        if (Input.GetAxis("Smell") > 0)
+        if (Input.GetButtonDown("Smell"))
         {
             vision = false;
             hearing = false;
             smell = true;
+            
+            changed = true;
         }
 
-        // Setting objects to enable or disable depending on the active sense
-        foreach (MonoBehaviour script in visionObjects)
+        if (changed)
         {
-            script.enabled = vision;
-        }
+            // Setting objects to enable or disable depending on the active sense
+            foreach (MonoBehaviour script in visionScripts)
+            {
+                script.enabled = vision;
+            }
 
-        foreach (MonoBehaviour script in hearingObjects)
-        {
-            script.enabled = hearing;
-        }
+            foreach (MonoBehaviour script in hearingScripts)
+            {
+                script.enabled = hearing;
+            }
 
-        foreach (MonoBehaviour script in smellObjects)
-        {
-            script.enabled = smell;
-        }
+            foreach (MonoBehaviour script in smellScripts)
+            {
+                script.enabled = smell;
+            }
+            
+            // game object enable/disable
+            foreach (GameObject obj in visionObjs)
+            {
+                obj.SetActive(vision);
+            }
 
-        // Extra logic for audio
-        if (!hearing)
-        {
-            mainCamera.cullingMask &= ~(1 << audioParticleLayer);
-        }
-        else
-        {
-            mainCamera.cullingMask |= 1 << audioParticleLayer;
+            foreach (GameObject obj in hearingObjs)
+            {
+                obj.SetActive(hearing);
+            }
+
+            foreach (GameObject obj in smellObjs)
+            {
+                obj.SetActive(smell);
+            }
+
+            // Extra logic for audio
+            if (!hearing)
+            {
+                mainCamera.cullingMask &= ~(1 << audioParticleLayer);
+            }
+            else
+            {
+                mainCamera.cullingMask |= 1 << audioParticleLayer;
+            }
         }
     }
 }

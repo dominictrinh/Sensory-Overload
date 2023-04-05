@@ -103,6 +103,18 @@ public class InventoryController : MonoBehaviour
         return removed;
     }
 
+    public bool InInventory(GameObject obj)
+    {
+        // does the object have an InventoryObject component
+        InventoryObject invObjComponent = obj.GetComponent<InventoryObject>();
+        if (invObjComponent != null)
+        {
+            return inventoryList.Contains(invObjComponent);
+        }
+
+        return false; 
+    }
+
     private void Update()
     {
         // if (Input.GetButtonDown("Drop"))
@@ -117,14 +129,14 @@ public class InventoryController : MonoBehaviour
             if (inventoryList.Count > 0)
             {
                 int currentItemIndex = inventoryList.IndexOf(currentItem);
-                if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+                if (Input.GetButtonDown("Inventory Forward"))
                 {
                     currentItem.gameObject.SetActive(false);
                     
                     currentItemIndex = (currentItemIndex + 1) % inventoryList.Count;
                     currentItem = inventoryList[currentItemIndex];
-                } 
-                else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+                }
+                else if (Input.GetButtonDown("Inventory Back"))
                 {
                     currentItem.gameObject.SetActive(false);
                     

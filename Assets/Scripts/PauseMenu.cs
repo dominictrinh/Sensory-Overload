@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private bool paused;
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject player;
+    [SerializeField] private List<GameObject> objectsToPause;
+    [SerializeField] private List<MonoBehaviour> scriptsToPause;
 
     void Start()
     {
@@ -21,10 +23,17 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
 
-        MonoBehaviour[] scripts = player.GetComponents<MonoBehaviour>();
-        foreach (MonoBehaviour script in scripts)
+        foreach (MonoBehaviour script in scriptsToPause)
         {
             script.enabled = false;
+        }
+        
+        foreach (GameObject obj in objectsToPause)
+        {
+            // TODO: might not be needed to do this
+            // if you're disabling objects during a pause like
+            // you sure about that?
+            obj.SetActive(false);
         }
     }
 
@@ -34,10 +43,17 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
         
-        MonoBehaviour[] scripts = player.GetComponents<MonoBehaviour>();
-        foreach (MonoBehaviour script in scripts)
+        foreach (MonoBehaviour script in scriptsToPause)
         {
             script.enabled = true;
+        }
+        
+        foreach (GameObject obj in objectsToPause)
+        {
+            // TODO: might not be needed to do this
+            // if you're disabling objects during a pause like
+            // you sure about that?
+            obj.SetActive(true);
         }
     }
 

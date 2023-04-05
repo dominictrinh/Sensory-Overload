@@ -261,20 +261,20 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<b>Developers</b>
 
-    <line-height=25%>
+    <size=6> </size>
 
-    <line-height=100%>Zhenyang
-    Cai, Steven Van, Dominic Trinh
+    Zhenyang Cai, Steven Van,
+    Dominic Trinh
 
 
     <b>Assets</b>
 
-    <line-height=25%>
+    <size=6> </size>
 
-    <line-height=100%>Sprites:
-    itch.io
+    Level Sprites: Cosmic
+    Legacy! Sci-Fi Pack - Petricake Games
 
-'
+    Player Sprites: Monster Pack I: Penusbmic'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1207,6 +1207,7 @@ GameObject:
   - component: {fileID: 1289013064}
   - component: {fileID: 1289013066}
   - component: {fileID: 1289013065}
+  - component: {fileID: 1289013067}
   m_Layer: 5
   m_Name: Help
   m_TagString: Untagged
@@ -1274,6 +1275,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289013063}
   m_CullTransparentMesh: 1
+--- !u!114 &1289013067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289013063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0401f10037bbb4481a247583170505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1300263567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,7 +2227,23 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Controls:'
+  m_text: '<size=24><b>Controls</b></size>
+
+    <size=6> </size>
+
+    WASD - Movement
+
+    Mouse
+    - Look
+
+    Q and E - Switch inventory items
+
+    Escape - Pause menu
+
+    1,
+    2, 3 - Switch senses
+
+    Space - Ping (hearing mode only)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2302,6 +2331,7 @@ GameObject:
   - component: {fileID: 2088384171}
   - component: {fileID: 2088384173}
   - component: {fileID: 2088384172}
+  - component: {fileID: 2088384174}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -2369,6 +2399,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088384170}
   m_CullTransparentMesh: 1
+--- !u!114 &2088384174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088384170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0401f10037bbb4481a247583170505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2096690192
 GameObject:
   m_ObjectHideFlags: 0
