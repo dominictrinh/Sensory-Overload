@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3984578733480624408
 RectTransform:
   m_ObjectHideFlags: 0
@@ -481,7 +481,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612041486567760717}
-  - component: {fileID: 7612041486567760716}
   m_Layer: 0
   m_Name: InventoryUI
   m_TagString: Untagged
@@ -505,26 +504,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7612041486567760716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7612041486567760718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68a2ddada1e4a8b4eb8fe3c19f255435, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventoryPanel: {fileID: 7612041485942703766}
-  invObjectPrefab: {fileID: 0}
-  pickupDialog: {fileID: 0}
-  maxItems: 0
-  inventoryList: []
-  currentItem: {fileID: 0}
-  pickupRadius: 0
-  dropRadius: 0
-  cooldown: 0
-  overlaps: []
-  overlapMax: 0
