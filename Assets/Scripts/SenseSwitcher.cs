@@ -6,6 +6,13 @@ using UnityEngine.Serialization;
 
 public class SenseSwitcher : MonoBehaviour
 {
+    enum Sense
+    {
+        Vision,
+        Hearing,
+        Smell
+    }
+    
     [Header("Objects List")]
     [FormerlySerializedAs("visionObjects")] [SerializeField] private List<MonoBehaviour> visionScripts;
     [FormerlySerializedAs("hearingObjects")] [SerializeField] private List<MonoBehaviour> hearingScripts;
@@ -14,43 +21,116 @@ public class SenseSwitcher : MonoBehaviour
     [SerializeField] private List<GameObject> hearingObjs;
     [SerializeField] private List<GameObject> smellObjs;
 
-    [Header("Current State")]
-    [SerializeField] private bool vision;
-    [SerializeField] private bool hearing;
-    [SerializeField] private bool smell;
+    [Header("Current State")] 
+    [SerializeField] private Sense currentSense;
+    private bool _vision;
+    private bool _hearing;
+    private bool _smell;
 
     [Header("Audio Extra")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private int audioParticleLayer;
+    // [SerializeField] private EmitAudioParticle _audioScript;
+
+    void Start()
+    {
+        if (currentSense == Sense.Vision)
+        {
+            _vision = true;
+            _hearing = false;
+            _smell = false;
+        } 
+        else if (currentSense == Sense.Hearing)
+        {
+            _vision = false;
+            _hearing = true;
+            _smell = false;
+        }
+        else
+        {
+            _vision = false;
+            _hearing = false;
+            _smell = false;
+        }
+        
+        foreach (MonoBehaviour script in visionScripts)
+        {
+            script.enabled = _vision;
+        }
+
+        foreach (MonoBehaviour script in hearingScripts)
+        {
+            script.enabled = _hearing;
+        }
+
+        foreach (MonoBehaviour script in smellScripts)
+        {
+            script.enabled = _smell;
+        }
+            
+        // game object enable/disable
+        foreach (GameObject obj in visionObjs)
+        {
+            obj.SetActive(_vision);
+        }
+
+        foreach (GameObject obj in hearingObjs)
+        {
+            obj.SetActive(_hearing);
+        }
+
+        foreach (GameObject obj in smellObjs)
+        {
+            obj.SetActive(_smell);
+        }
+
+        // Extra logic for audio
+        if (!_hearing)
+        {
+            mainCamera.cullingMask &= ~(1 << audioParticleLayer);
+        }
+        else
+        {
+            mainCamera.cullingMask |= 1 << audioParticleLayer;
+        }
+        // _audioScript = GetComponent<EmitAudioParticle>();
+        // _audioScript.enabled = _hearing;
+    }
 
     // Update is called once per frame
     void Update()
     {
         bool changed = false;
-        
+
         if (Input.GetButtonDown("Vision"))
         {
-            vision = true;
-            hearing = false;
-            smell = false;
+            currentSense = Sense.Vision;
+            
+            _vision = true;
+            _hearing = false;
+            _smell = false;
 
             changed = true;
         }
 
-        if (Input.GetButtonDown("Hearing"))
+        else if (Input.GetButtonDown("Hearing"))
         {
-            vision = false;
-            hearing = true;
-            smell = false;
+            currentSense = Sense.Hearing;
+            
+            _vision = false;
+            _hearing = true;
+            _smell = false;
             
             changed = true;
         }
 
-        if (Input.GetButtonDown("Smell"))
+        else if (Input.GetButtonDown("Smell"))
         {
-            vision = false;
-            hearing = false;
-            smell = true;
+            currentSense = Sense.Smell;
+            
+            _vision = false;
+            _hearing = false;
+            _smell = true;
             
             changed = true;
         }
@@ -60,37 +140,40 @@ public class SenseSwitcher : MonoBehaviour
             // Setting objects to enable or disable depending on the active sense
             foreach (MonoBehaviour script in visionScripts)
             {
-                script.enabled = vision;
+                Debug.Log($"{script.name} set to {_vision}");
+                script.enabled = _vision;
             }
 
             foreach (MonoBehaviour script in hearingScripts)
             {
-                script.enabled = hearing;
+                Debug.Log($"{script.name} set to {_hearing}");
+                script.enabled = _hearing;
             }
 
             foreach (MonoBehaviour script in smellScripts)
             {
-                script.enabled = smell;
+                Debug.Log($"{script.name} set to {_smell}");
+                script.enabled = _smell;
             }
             
             // game object enable/disable
             foreach (GameObject obj in visionObjs)
             {
-                obj.SetActive(vision);
+                obj.SetActive(_vision);
             }
 
             foreach (GameObject obj in hearingObjs)
             {
-                obj.SetActive(hearing);
+                obj.SetActive(_hearing);
             }
 
             foreach (GameObject obj in smellObjs)
             {
-                obj.SetActive(smell);
+                obj.SetActive(_smell);
             }
 
             // Extra logic for audio
-            if (!hearing)
+            if (!_hearing)
             {
                 mainCamera.cullingMask &= ~(1 << audioParticleLayer);
             }
@@ -98,6 +181,7 @@ public class SenseSwitcher : MonoBehaviour
             {
                 mainCamera.cullingMask |= 1 << audioParticleLayer;
             }
+            // _audioScript.enabled = _hearing;
         }
     }
 }

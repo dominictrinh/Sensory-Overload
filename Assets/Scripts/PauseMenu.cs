@@ -11,6 +11,9 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private List<GameObject> objectsToPause;
     [SerializeField] private List<MonoBehaviour> scriptsToPause;
+    
+    [SerializeField] private Dictionary<GameObject, bool> objPreviousState;
+    [SerializeField] private Dictionary<MonoBehaviour, bool> scriptPreviousState;
 
     void Start()
     {
@@ -25,6 +28,7 @@ public class PauseMenu : MonoBehaviour
 
         foreach (MonoBehaviour script in scriptsToPause)
         {
+            scriptPreviousState.Add(script, script.enabled);
             script.enabled = false;
         }
         
@@ -33,6 +37,7 @@ public class PauseMenu : MonoBehaviour
             // TODO: might not be needed to do this
             // if you're disabling objects during a pause like
             // you sure about that?
+            objPreviousState.Add(obj, obj.activeInHierarchy);
             obj.SetActive(false);
         }
     }
@@ -45,7 +50,7 @@ public class PauseMenu : MonoBehaviour
         
         foreach (MonoBehaviour script in scriptsToPause)
         {
-            script.enabled = true;
+            script.enabled = scriptPreviousState[script];
         }
         
         foreach (GameObject obj in objectsToPause)
@@ -53,25 +58,27 @@ public class PauseMenu : MonoBehaviour
             // TODO: might not be needed to do this
             // if you're disabling objects during a pause like
             // you sure about that?
-            obj.SetActive(true);
+            obj.SetActive(objPreviousState[obj]);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        // bool changed = false;
+        
         if (Input.GetButtonDown("Pause"))
         {
             paused = !paused;
-        }
-
-        if (paused)
-        {
-            Pause();
-        }
-        else
-        {
-            Unpause();
+            // changed = true;
+            if (paused)
+            {
+                Pause();
+            }
+            else
+            {
+                Unpause();
+            }
         }
     }
 }
