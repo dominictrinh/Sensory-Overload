@@ -18,6 +18,8 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         paused = false;
+        objPreviousState = new Dictionary<GameObject, bool>();
+        scriptPreviousState = new Dictionary<MonoBehaviour, bool>();
     }
 
     public void Pause()
@@ -28,7 +30,14 @@ public class PauseMenu : MonoBehaviour
 
         foreach (MonoBehaviour script in scriptsToPause)
         {
-            scriptPreviousState.Add(script, script.enabled);
+            if (scriptPreviousState.ContainsKey(script))
+            {
+                scriptPreviousState[script] = script.enabled;
+            }
+            else
+            {
+                scriptPreviousState.Add(script, script.enabled);
+            }
             script.enabled = false;
         }
         
@@ -37,7 +46,15 @@ public class PauseMenu : MonoBehaviour
             // TODO: might not be needed to do this
             // if you're disabling objects during a pause like
             // you sure about that?
-            objPreviousState.Add(obj, obj.activeInHierarchy);
+            if (objPreviousState.ContainsKey(obj))
+            {
+                objPreviousState[obj] = obj.activeInHierarchy;
+            }
+            else
+            {
+                objPreviousState.Add(obj, obj.activeInHierarchy);
+            }
+            
             obj.SetActive(false);
         }
     }
