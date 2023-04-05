@@ -11,7 +11,6 @@ public class EmitterTrigger : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Particle"))
         {
-            Debug.Log("particle found");
             a._cooldown = 0;
             b._cooldown = 0;
             c._cooldown = 0;
