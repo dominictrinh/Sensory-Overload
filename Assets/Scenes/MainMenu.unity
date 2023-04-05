@@ -632,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 714572dc7dc83f64faa36fd1e3aa69b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: VideoDemo
+  sceneName: Game
 --- !u!4 &650310783
 Transform:
   m_ObjectHideFlags: 0
