@@ -12,7 +12,8 @@ public class PasswordDoor : MonoBehaviour
     [SerializeField] private float playerDist;
 
     bool displayPasswordScreen = false;
-    public string password = "test";
+    public string password = "clock";
+    public string password2 = "1245";
     public string passwordToEdit = "";
 
     void Update()
@@ -67,7 +68,7 @@ public class PasswordDoor : MonoBehaviour
             bool submitField = GUI.Button(new Rect(197, 20, 54, 20), "Submit");
             
 
-            if ((Input.GetKeyDown(KeyCode.Return) || submitField) && passwordToEdit == password)
+            if ((Input.GetKeyDown(KeyCode.Return) || submitField) && passwordToEdit == password || passwordToEdit == password2)
             {
                 door.OpenDoor();
             }
