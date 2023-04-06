@@ -7,7 +7,8 @@ using UnityEngine.Tilemaps;
 public class PaintScript : MonoBehaviour
 {
     [SerializeField] private InventoryController inventoryScript;
-    [SerializeField] private SenseSwitcher senseScript;
+    // [SerializeField] private SenseSwitcher senseScript;
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject paintBucketObj;
     [SerializeField] private List<Collider2D> overlaps;
     public float range;
@@ -26,7 +27,9 @@ public class PaintScript : MonoBehaviour
                     if (overlap.CompareTag("Paint"))
                     {
                         overlap.GetComponent<TilemapRenderer>().enabled = true;
-                        if (senseScript._smell)
+
+                        SenseSwitcher senseScript = player.GetComponent<SenseSwitcher>();
+                        if (senseScript.currentSense == SenseSwitcher.Sense.Smell)
                         {
                             overlap.GetComponent<ParticleSystemRenderer>().enabled = true;
                         }

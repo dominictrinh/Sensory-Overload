@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 
 public class SenseSwitcher : MonoBehaviour
 {
-    enum Sense
+    public enum Sense
     {
         Vision,
         Hearing,
@@ -23,10 +23,10 @@ public class SenseSwitcher : MonoBehaviour
     [SerializeField] private List<GameObject> smellObjs;
 
     [Header("Current State")] 
-    [SerializeField] private Sense currentSense;
+    [SerializeField] public Sense currentSense;
     private bool _vision;
     private bool _hearing;
-    public bool _smell;
+    private bool _smell;
 
     [Header("Audio Extra")]
     [SerializeField] private Camera mainCamera;

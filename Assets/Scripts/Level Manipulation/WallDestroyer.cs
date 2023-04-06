@@ -7,6 +7,10 @@ public class WallDestroyer : MonoBehaviour
 {
     [SerializeField] private GameObject shadowOld;
     [SerializeField] private GameObject shadowNew;
+
+    [SerializeField] private GameObject center;
+    [SerializeField] private GameObject player;
+    [SerializeField] private float dist;
     public void BreakWall()
     {
         gameObject.SetActive(false);
@@ -17,9 +21,12 @@ public class WallDestroyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetButtonDown("Interact"))
         {
-            BreakWall();
+            if (Vector2.Distance(center.transform.position, player.transform.position) < dist)
+            {
+                BreakWall();
+            }
         }
     }
 }

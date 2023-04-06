@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/VideoDemo.unity
     guid: 004fb2e8fd3f4db4785ff5a196effe7f
+  - enabled: 1
+    path: Assets/Scenes/EndingScreen.unity
+    guid: 51fd4c03140327446a807d2301066681
   m_configObjects: {}

@@ -224,6 +224,10 @@ public class InventoryController : MonoBehaviour
                             pickupDialog.SetActive(false);
                         }
                     }
+                    else
+                    {
+                        pickupDialog.SetActive(false);
+                    }
                 }
 
             }

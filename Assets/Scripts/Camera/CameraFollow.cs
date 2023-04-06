@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField] private SenseSwitcher senseScript;
+    // [SerializeField] private SenseSwitcher senseScript;
+    [SerializeField] private GameObject player;
     
     public float zoomSpeed;
     public float minZoom;
@@ -25,7 +26,9 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (!senseScript._smell)
+        SenseSwitcher senseScript = player.GetComponent<SenseSwitcher>();
+        
+        if (senseScript.currentSense == SenseSwitcher.Sense.Smell)
         {
             if (Input.mouseScrollDelta.y > 0)
             {
