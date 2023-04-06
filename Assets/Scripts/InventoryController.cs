@@ -307,7 +307,7 @@ public class InventoryController : MonoBehaviour
                     // currentItemGO.transform.position = new Vector3(objectX, objectY);
                 }
                 
-                if (Input.GetButtonDown("Drop"))
+                if (Input.GetButtonDown("Drop") || Input.GetMouseButtonDown(0))
                 {
                     if (currentItem != null)
                     {
