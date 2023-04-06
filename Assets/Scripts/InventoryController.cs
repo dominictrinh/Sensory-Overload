@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class InventoryController : MonoBehaviour
@@ -24,7 +25,8 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float pickupRadius;
     [SerializeField] private float dropDetectionRadius;
-    [SerializeField] private float dropRadius;
+    [FormerlySerializedAs("dropRadius")] [SerializeField] private float dropRadiusOuter;
+    [SerializeField] private float dropRadiusInner;
     [Range(0.0f, 1.0f)]
     [SerializeField] private float dropImgAlpha;
     // [SerializeField] private float cooldown;
@@ -259,6 +261,9 @@ public class InventoryController : MonoBehaviour
 
                     Vector3 gObjectPos = gameObject.transform.position;
                     
+                    // get distance to cursor
+                    float mouseDist = Vector3.Distance(worldPos2D, gameObject.transform.position);
+                    
                     // get angle of cursor
                     float x = worldPos2D.x - gObjectPos.x;
                     float y = worldPos2D.y - gObjectPos.y;
@@ -269,13 +274,33 @@ public class InventoryController : MonoBehaviour
                     {
                         angleToCursor = (float)(Math.Atan(y / x) + Math.PI);
                     }
+                    
+                    // clamping distance if necessary
+                    if (mouseDist > dropRadiusOuter)
+                    {
+                        float objectX = gObjectPos.x + (float)(dropRadiusOuter * Math.Cos(angleToCursor));
+                        float objectY = gObjectPos.y + (float)(dropRadiusOuter * Math.Sin(angleToCursor));
+                        
+                        currentItemGO.transform.position = new Vector3(objectX, objectY);
+                    } 
+                    else if (mouseDist < dropRadiusInner)
+                    {
+                        float objectX = gObjectPos.x + (float)(dropRadiusInner * Math.Cos(angleToCursor));
+                        float objectY = gObjectPos.y + (float)(dropRadiusInner * Math.Sin(angleToCursor));
+                        
+                        currentItemGO.transform.position = new Vector3(objectX, objectY);
+                    }
+                    else
+                    {
+                        currentItemGO.transform.position = worldPos2D;
+                    }
 
                     // angle and radius to position
-                    float objectX = gObjectPos.x + (float)(dropRadius * Math.Cos(angleToCursor));
-                    float objectY = gObjectPos.y + (float)(dropRadius * Math.Sin(angleToCursor));
+                    // float objectX = gObjectPos.x + (float)(dropRadiusOuter * Math.Cos(angleToCursor));
+                    // float objectY = gObjectPos.y + (float)(dropRadiusInner * Math.Sin(angleToCursor));
 
                     // putting object at the correct position
-                    currentItemGO.transform.position = new Vector3(objectX, objectY);
+                    // currentItemGO.transform.position = new Vector3(objectX, objectY);
                 }
                 
                 if (Input.GetButtonDown("Drop"))
