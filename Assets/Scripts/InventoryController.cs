@@ -318,6 +318,24 @@ public class InventoryController : MonoBehaviour
                         ContactFilter2D noFilter = new ContactFilter2D();
                         int overlapCount = Physics2D.OverlapCircle(currentItemGO.transform.position, dropDetectionRadius, noFilter.NoFilter(), overlaps);
 
+                        List<RaycastHit2D> results = new List<RaycastHit2D>();
+                        int pickupLinecastCount =
+                            Physics2D.Linecast(gameObject.transform.position, currentItemGO.transform.position, noFilter, results);
+
+                        foreach (RaycastHit2D hit in results)
+                        {
+                            if (hit.collider.isTrigger)
+                            {
+                                pickupLinecastCount--;
+                            }
+                        }
+                        
+                        // Debug.Log($"objects between player and drop item: {pickupLinecastCount}");
+                        if (pickupLinecastCount > 1)
+                        {
+                            Debug.Log("can't place item here!");
+                        } 
+                        
                         foreach (Collider2D overlap in overlaps)
                         {
                             if (overlap.isTrigger)
@@ -325,8 +343,8 @@ public class InventoryController : MonoBehaviour
                                 overlapCount--;
                             }
                         }
-                        
-                        if (overlapCount <= 0)
+
+                        if (overlapCount <= 0 && pickupLinecastCount <= 1)
                         {
                             Debug.Log("No objects in desired position!");
                             // if no objects in between
