@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridPressurePlate : MonoBehaviour
 {
     [SerializeField] private List<PressurePlate> plateScripts;
     [SerializeField] private DoorToggle door;
 
-    private bool closed;
+    private int unlock;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,18 +19,19 @@ public class GridPressurePlate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        unlock = plateScripts.Count;
         foreach (PressurePlate script in plateScripts)
         {
             if (script.isGrid)
             {
-                if (!script.isActivated)
+                if (script.isActivated)
                 {
-                    closed = true;
+                    unlock--;
                 }
             }
         }
 
-        if (!closed)
+        if (unlock == 0)
         {
             door.OpenDoor();
         }

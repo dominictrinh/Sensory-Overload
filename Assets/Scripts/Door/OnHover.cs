@@ -7,8 +7,10 @@ public class OnHover : MonoBehaviour
 {
     [SerializeField] private DoorAnimator door;
     [SerializeField] private DoorToggle lvl2door;
-    
-    bool isHovering;
+    [SerializeField] private ScannerPlayerBounds boundsScript;
+
+    private bool isMouseOver;
+    private bool isPlayerOver;
     public float timeToWait = 3f;
     float timeLeft;
 
@@ -19,19 +21,25 @@ public class OnHover : MonoBehaviour
 
     void OnMouseOver()
     {
-        isHovering = true;
+        isMouseOver = true;
     }
      
     void OnMouseExit()
     {
-        isHovering = false;
+        isMouseOver = false;
         timeLeft = timeToWait;
         lvl2door.CloseDoor();
     }
-     
+
     void Update()
     {
-        if (isHovering)
+        if (!boundsScript.isPlayerOver)
+        {
+            timeLeft = timeToWait;
+            lvl2door.CloseDoor();
+        }
+
+        if (isMouseOver && boundsScript.isPlayerOver)
         {
             timeLeft-=Time.deltaTime;
         }

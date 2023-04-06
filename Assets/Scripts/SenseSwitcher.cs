@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.Tilemaps;
 
 public class SenseSwitcher : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class SenseSwitcher : MonoBehaviour
     [SerializeField] private Sense currentSense;
     private bool _vision;
     private bool _hearing;
-    private bool _smell;
+    public bool _smell;
 
     [Header("Audio Extra")]
     [SerializeField] private Camera mainCamera;
@@ -81,7 +82,15 @@ public class SenseSwitcher : MonoBehaviour
 
         foreach (GameObject obj in smellObjs)
         {
-            obj.SetActive(_smell);
+            if (obj.CompareTag("Paint"))
+            {
+                obj.GetComponent<ParticleSystemRenderer>().enabled = _smell;
+            }
+            else
+            {
+                obj.SetActive(_smell);
+            }
+            
         }
 
         // Extra logic for audio
@@ -169,7 +178,17 @@ public class SenseSwitcher : MonoBehaviour
 
             foreach (GameObject obj in smellObjs)
             {
-                obj.SetActive(_smell);
+                if (obj.CompareTag("Paint"))
+                {
+                    if (obj.GetComponent<TilemapRenderer>().enabled)
+                    {
+                        obj.GetComponent<ParticleSystemRenderer>().enabled = _smell;
+                    }
+                }
+                else
+                {
+                    obj.SetActive(_smell);
+                }
             }
 
             // Extra logic for audio

@@ -47,6 +47,7 @@ public class PressurePlate : MonoBehaviour
         if (col.GetComponent<PressurePlateObject>() != null)
         {
             timeLeft = timeToWait;
+            isActivated = true;
         }
     }
 }
