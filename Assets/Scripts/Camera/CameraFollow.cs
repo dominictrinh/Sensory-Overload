@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -14,11 +15,16 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private Transform target;
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector3 targetPosition = target.position + offset;
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
         
+        
+    }
+
+    private void Update()
+    {
         if (!senseScript._smell)
         {
             if (Input.mouseScrollDelta.y > 0)
