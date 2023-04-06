@@ -20,6 +20,7 @@ public class PauseMenu : MonoBehaviour
         paused = false;
         objPreviousState = new Dictionary<GameObject, bool>();
         scriptPreviousState = new Dictionary<MonoBehaviour, bool>();
+        Time.timeScale = 1;
     }
 
     public void Pause()
