@@ -259,22 +259,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<b>Developers</b>
-
-    <size=6> </size>
-
-    Zhenyang Cai, Steven Van,
-    Dominic Trinh
-
-
-    <b>Assets</b>
-
-    <size=6> </size>
-
-    Level Sprites: Cosmic
-    Legacy! Sci-Fi Pack - Petricake Games
-
-    Player Sprites: Monster Pack I: Penusbmic'
+  m_text: "<b>Developers</b>\n<size=6> </size>\nZhenyang Cai, Steven Van, Dominic
+    Trinh\n\n<b>Assets</b>\n<size=6> </size>\nLevel Sprites: Cosmic Legacy! Sci-Fi
+    Pack - Petricake Games\nPlayer Sprites: Monster Pack I: Penusbmic\nSight Icon:
+    Kiranshastry - Flaticon \nHearing Icon: Roundicons - Flaticon\nSmell Icon: Freepik
+    - Flaticon"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
