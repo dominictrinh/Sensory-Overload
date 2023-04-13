@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Collections;
 using UnityEngine;
 
@@ -24,7 +25,9 @@ public class EyeScanner : MonoBehaviour
     [SerializeField] [Tooltip("Whether the door can stay open")]
     private bool staysOpen;
 
-    
+    [Header("Progress")] 
+    [SerializeField] private TextMeshProUGUI progressText;
+
     [Header("Miscellaneous")]
     [SerializeField] private float timeLeft;
     [SerializeField] private GameObject player;
@@ -95,10 +98,13 @@ public class EyeScanner : MonoBehaviour
         _isHovering = mainBounds.OverlapPoint(mousePos);
         _playerInCollider = scannerBounds.bounds.Intersects(_playerCollider.bounds);
 
-        if (!_isHovering && !_playerInCollider)
+        if (!_isHovering || !_playerInCollider)
         {
             // player not in colliders
-            timeLeft = timeToWait;
+            if (!staysOpen)
+            {
+                timeLeft = timeToWait;
+            }
         }
 
         if (timeLeft < 0)
@@ -115,6 +121,8 @@ public class EyeScanner : MonoBehaviour
                 CloseDoors();
             }
         }
+        
+        
     }
 
     private void FixedUpdate()
@@ -123,6 +131,19 @@ public class EyeScanner : MonoBehaviour
         {
             Debug.Log($"time left:{timeLeft}");
             timeLeft -= Time.fixedDeltaTime;
+        }
+        
+        float progressPercent = (timeToWait - timeLeft) / timeToWait * 100;
+        if (progressPercent > 100)
+        {
+            progressText.text = "100%";
+        } else if (progressPercent < 0)
+        {
+            progressText.text = "0.00%";
+        }
+        else
+        {
+            progressText.text = $"{progressPercent:F}%";
         }
     }
 }
