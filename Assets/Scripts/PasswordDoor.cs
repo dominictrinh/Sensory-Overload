@@ -12,6 +12,8 @@ public class PasswordDoor : MonoBehaviour
     [SerializeField] private float playerDist;
 
     bool displayPasswordScreen = false;
+    private bool displayCorrectness = false;
+    private bool passwordCorrect = false;
     public string password = "clock";
     public string password2 = "1245";
     public string passwordToEdit = "";
@@ -66,8 +68,30 @@ public class PasswordDoor : MonoBehaviour
             passwordToEdit = GUI.PasswordField(new Rect(87, 20, 100, 20), passwordToEdit, "*"[0], 25);
 
             bool submitField = GUI.Button(new Rect(197, 20, 54, 20), "Submit");
-            
 
+            if (Input.GetKeyDown(KeyCode.Return) || submitField)
+            {
+                if (passwordToEdit == password || passwordToEdit == password2)
+                {
+                    door.OpenDoor();
+                    passwordCorrect = true;
+                }
+
+                displayCorrectness = true;
+            }
+
+            if (displayCorrectness)
+            {
+                if (passwordCorrect)
+                {
+                    GUI.Label(new Rect(20, 40, 144, 20), "Password Correct!");
+                }
+                else
+                {
+                    GUI.Label(new Rect(20, 40, 144, 20), "Password Incorrect!");
+                }
+            }
+            
             if ((Input.GetKeyDown(KeyCode.Return) || submitField) && passwordToEdit == password || passwordToEdit == password2)
             {
                 door.OpenDoor();
