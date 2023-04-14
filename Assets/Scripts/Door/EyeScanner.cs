@@ -31,13 +31,15 @@ public class EyeScanner : MonoBehaviour
     [Header("Miscellaneous")]
     [SerializeField] private float timeLeft;
     [SerializeField] private GameObject player;
+    [SerializeField] private AudioSource audioSource;
+    public bool _isOpen;
     
     // private vars
     private Collider2D _playerCollider;
     private SpriteRenderer _spriteRenderer;
     private bool _isHovering;
     private bool _playerInCollider;
-    public bool _isOpen;
+    private bool _audioHasPlayed;
     
     // Start is called before the first frame update
     void Start()
@@ -47,6 +49,7 @@ public class EyeScanner : MonoBehaviour
 
         _isHovering = false;
         _playerInCollider = false;
+        _audioHasPlayed = false;
     }
 
     void Awake()
@@ -79,6 +82,12 @@ public class EyeScanner : MonoBehaviour
             doorAnimated.OpenDoor();
         if (doorToggle != null) 
             doorToggle.OpenDoor();
+
+        if (!_audioHasPlayed)
+        {
+            audioSource.Play();
+            _audioHasPlayed = true;
+        }
     }
 
     void CloseDoors()
@@ -88,6 +97,8 @@ public class EyeScanner : MonoBehaviour
             doorAnimated.CloseDoor();
         if (doorToggle != null) 
             doorToggle.CloseDoor();
+
+        _audioHasPlayed = false;
     }
 
     // Update is called once per frame
