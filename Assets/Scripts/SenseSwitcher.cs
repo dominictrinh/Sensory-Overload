@@ -31,6 +31,7 @@ public class SenseSwitcher : MonoBehaviour
     [Header("Audio Extra")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private int audioParticleLayer;
+    [SerializeField] private AudioListener audioListener;
     // [SerializeField] private EmitAudioParticle _audioScript;
 
     void Start()
@@ -94,14 +95,19 @@ public class SenseSwitcher : MonoBehaviour
         }
 
         // Extra logic for audio
-        if (!_hearing)
+        if (currentSense == Sense.Hearing)
         {
-            mainCamera.cullingMask &= ~(1 << audioParticleLayer);
+            // hearing yes
+            mainCamera.cullingMask |= 1 << audioParticleLayer;
+            audioListener.enabled = true;
         }
         else
         {
-            mainCamera.cullingMask |= 1 << audioParticleLayer;
+            // hearing no
+            mainCamera.cullingMask &= ~(1 << audioParticleLayer);
+            audioListener.enabled = false;
         }
+        
         // _audioScript = GetComponent<EmitAudioParticle>();
         // _audioScript.enabled = _hearing;
     }
@@ -192,15 +198,18 @@ public class SenseSwitcher : MonoBehaviour
             }
 
             // Extra logic for audio
-            if (!_hearing)
+            if (currentSense == Sense.Hearing)
             {
-                mainCamera.cullingMask &= ~(1 << audioParticleLayer);
+                // hearing yes
+                mainCamera.cullingMask |= 1 << audioParticleLayer;
+                audioListener.enabled = true;
             }
             else
             {
-                mainCamera.cullingMask |= 1 << audioParticleLayer;
+                // hearing no
+                mainCamera.cullingMask &= ~(1 << audioParticleLayer);
+                audioListener.enabled = false;
             }
-            // _audioScript.enabled = _hearing;
         }
     }
 }

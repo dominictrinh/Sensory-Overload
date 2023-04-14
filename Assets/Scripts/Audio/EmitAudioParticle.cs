@@ -32,6 +32,7 @@ public class EmitAudioParticle : MonoBehaviour
     [SerializeField] private bool isEmitter;
     [SerializeField] private Camera currentCamera;
     [SerializeField] private float sourceAngle;
+    [SerializeField] private AudioSource soundEffect;
     public float _cooldown;
     
     // Start is called before the first frame update
@@ -86,7 +87,11 @@ public class EmitAudioParticle : MonoBehaviour
                         particleVel * Mathf.Sin(angle + offset));
                 }
             }
-            
+
+            if (soundEffect != null)
+            {
+                soundEffect.PlayOneShot(soundEffect.clip);
+            }
             _cooldown = cooldown;
         }
     }
