@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private bool paused;
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private List<GameObject> pauseMenuItems;
     [SerializeField] private GameObject player;
     [SerializeField] private List<GameObject> objectsToPause;
     [SerializeField] private List<MonoBehaviour> scriptsToPause;
@@ -18,6 +19,7 @@ public class PauseMenu : MonoBehaviour
     void Start()
     {
         paused = false;
+        // Unpause();
         objPreviousState = new Dictionary<GameObject, bool>();
         scriptPreviousState = new Dictionary<MonoBehaviour, bool>();
         Time.timeScale = 1;
@@ -64,6 +66,11 @@ public class PauseMenu : MonoBehaviour
     {
         paused = false;
         pauseMenu.SetActive(false);
+        foreach (GameObject pauseMenuItem in pauseMenuItems)
+        {
+            pauseMenuItem.SetActive(false);
+        }
+        
         Time.timeScale = 1;
         
         foreach (MonoBehaviour script in scriptsToPause)
