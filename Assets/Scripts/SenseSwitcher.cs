@@ -99,13 +99,15 @@ public class SenseSwitcher : MonoBehaviour
         {
             // hearing yes
             mainCamera.cullingMask |= 1 << audioParticleLayer;
-            audioListener.enabled = true;
+            // audioListener.enabled = true;
+            AudioListener.volume = 1f;
         }
         else
         {
             // hearing no
             mainCamera.cullingMask &= ~(1 << audioParticleLayer);
-            audioListener.enabled = false;
+            // audioListener.enabled = false;
+            AudioListener.volume = 0f;
         }
         
         // _audioScript = GetComponent<EmitAudioParticle>();
@@ -202,13 +204,15 @@ public class SenseSwitcher : MonoBehaviour
             {
                 // hearing yes
                 mainCamera.cullingMask |= 1 << audioParticleLayer;
-                audioListener.enabled = true;
+                // audioListener.enabled = true;
+                AudioListener.volume = 1f;
             }
             else
             {
                 // hearing no
                 mainCamera.cullingMask &= ~(1 << audioParticleLayer);
-                audioListener.enabled = false;
+                // audioListener.enabled = false;
+                AudioListener.volume = 0f;
             }
         }
     }
