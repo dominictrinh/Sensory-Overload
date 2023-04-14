@@ -11,11 +11,13 @@ public class PasswordDoor : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private float playerDist;
 
+    public List<string> passwords;
+
     bool displayPasswordScreen = false;
     private bool displayCorrectness = false;
     private bool passwordCorrect = false;
-    public string password = "clock";
-    public string password2 = "1245";
+    // public string password = "clock";
+    // public string password2 = "1245";
     public string passwordToEdit = "";
 
     void Update()
@@ -65,18 +67,22 @@ public class PasswordDoor : MonoBehaviour
         {
             GUI.Label(new Rect(20, 20, 72, 20), "Password: ");
             
-            passwordToEdit = GUI.PasswordField(new Rect(87, 20, 100, 20), passwordToEdit, "*"[0], 25);
+            // passwordToEdit = GUI.PasswordField(new Rect(87, 20, 100, 20), passwordToEdit, "*"[0], 25);
+            passwordToEdit = GUI.TextField(new Rect(87, 20, 100, 20), passwordToEdit, 25);
 
             bool submitField = GUI.Button(new Rect(197, 20, 54, 20), "Submit");
 
             if (Input.GetKeyDown(KeyCode.Return) || submitField)
             {
-                if (passwordToEdit == password || passwordToEdit == password2)
+                foreach (string password in passwords)
                 {
-                    door.OpenDoor();
-                    passwordCorrect = true;
+                    if (passwordToEdit == password)
+                    {
+                        door.OpenDoor();
+                        passwordCorrect = true;
+                        break;
+                    }
                 }
-
                 displayCorrectness = true;
             }
 
@@ -90,11 +96,6 @@ public class PasswordDoor : MonoBehaviour
                 {
                     GUI.Label(new Rect(20, 40, 144, 20), "Password Incorrect!");
                 }
-            }
-            
-            if ((Input.GetKeyDown(KeyCode.Return) || submitField) && passwordToEdit == password || passwordToEdit == password2)
-            {
-                door.OpenDoor();
             }
         }
     }

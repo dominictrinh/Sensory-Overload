@@ -139,11 +139,11 @@ public class EyeScanner : MonoBehaviour
             progressText.text = "100%";
         } else if (progressPercent < 0)
         {
-            progressText.text = "0.00%";
+            progressText.text = "0%";
         }
         else
         {
-            progressText.text = $"{progressPercent:F}%";
+            progressText.text = $"{progressPercent:F0}%";
         }
     }
 }
